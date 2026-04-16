@@ -116,7 +116,7 @@ def _parse_skill(skill_file: Path) -> dict:
 
 
 def collect_skills() -> list:
-    """Collect top-level skills, nesting sub-skills inside their parent."""
+    """Collect top-level skills from plugins/mp-developer/skills/*/SKILL.md."""
     components = []
     skills_dir = PLUGIN_DIR / "skills"
     if not skills_dir.exists():
@@ -127,19 +127,7 @@ def collect_skills() -> list:
         if not skill_file.is_file():
             continue
 
-        entry = _parse_skill(skill_file)
-
-        # Collect sub-skills (e.g. mp-checkout-bricks/payment/SKILL.md)
-        sub_skills = []
-        for sub_dir in sorted(skill_dir.iterdir()):
-            sub_file = sub_dir / "SKILL.md"
-            if sub_dir.is_dir() and sub_file.is_file():
-                sub_skills.append(_parse_skill(sub_file))
-
-        if sub_skills:
-            entry["subSkills"] = sub_skills
-
-        components.append(entry)
+        components.append(_parse_skill(skill_file))
 
     return components
 
@@ -254,7 +242,7 @@ def main():
     commands = collect_commands()
     hooks = collect_hooks()
 
-    all_components = skills + agents + commands + hooks
+    all_components = agents + skills + commands + hooks
 
     catalog = {
         "generated_at": datetime.now(timezone.utc).isoformat(),

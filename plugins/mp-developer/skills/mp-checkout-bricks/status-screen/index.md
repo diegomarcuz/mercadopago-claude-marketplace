@@ -1,11 +1,16 @@
----
-name: status-screen
-description: "Payment result screen (approved/pending/rejected) with automatic 3DS challenge handling. Requires a payment_id from MercadoPago Payments API. Use when: Status Screen Brick, show payment result, mostrar resultado, resultado del pago, 3DS challenge, tela de status, post-payment screen."
-compatibility: "JavaScript browser-only. All 7 MP markets (MLA/MLB/MLM/MCO/MLC/MPE/MLU)."
-metadata:
-  author: "checkout-bricks"
-  version: "1.0.0"
----
+## Description
+
+Payment result screen (approved/pending/rejected) with automatic 3DS challenge handling. Requires a payment_id from MercadoPago Payments API. Use when: Status Screen Brick, show payment result, mostrar resultado, resultado del pago, 3DS challenge, tela de status, post-payment screen.
+
+## Compatibility
+
+JavaScript browser-only. All 7 MP markets (MLA/MLB/MLM/MCO/MLC/MPE/MLU).
+
+## Metadata
+
+### Version
+
+1.0.0
 
 # MercadoPago Status Screen Brick
 

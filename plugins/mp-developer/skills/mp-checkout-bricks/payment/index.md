@@ -1,11 +1,16 @@
----
-name: payment
-description: "All-in-one payment form: cards, Pix, Boleto, OXXO, PSE, Yape, cash methods, installments, and MercadoPago wallet. Use when: Payment Brick, multiple payment methods, formulário de pagamento, métodos de pago, Pix, Boleto, OXXO, checkout completo, all-in-one checkout, aceitar vários meios de pagamento, aceptar múltiples medios de pago."
-compatibility: "JavaScript browser-only. All 7 MP markets (MLA/MLB/MLM/MCO/MLC/MPE/MLU)."
-metadata:
-  author: "checkout-bricks"
-  version: "1.0.0"
----
+## Description
+
+All-in-one payment form: cards, Pix, Boleto, OXXO, PSE, Yape, cash methods, installments, and MercadoPago wallet. Use when: Payment Brick, multiple payment methods, formulário de pagamento, métodos de pago, Pix, Boleto, OXXO, checkout completo, all-in-one checkout, aceitar vários meios de pagamento, aceptar múltiples medios de pago.
+
+## Compatibility
+
+JavaScript browser-only. All 7 MP markets (MLA/MLB/MLM/MCO/MLC/MPE/MLU).
+
+## Metadata
+
+### Version
+
+1.0.0
 
 # MercadoPago Payment Brick
 

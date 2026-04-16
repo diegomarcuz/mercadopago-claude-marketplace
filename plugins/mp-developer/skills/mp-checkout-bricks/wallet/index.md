@@ -1,11 +1,16 @@
----
-name: wallet
-description: "One-click pay button for logged-in MercadoPago users using saved cards, balance, or Mercado Crédito. Use when: Wallet Brick, pay with MercadoPago, pagar com Mercado Pago, pagar con Mercado Pago, botão MercadoPago, one-click payment, carteira digital."
-compatibility: "JavaScript browser-only. All 7 MP markets (MLA/MLB/MLM/MCO/MLC/MPE/MLU)."
-metadata:
-  author: "checkout-bricks"
-  version: "1.0.0"
----
+## Description
+
+One-click pay button for logged-in MercadoPago users using saved cards, balance, or Mercado Crédito. Use when: Wallet Brick, pay with MercadoPago, pagar com Mercado Pago, pagar con Mercado Pago, botão MercadoPago, one-click payment, carteira digital.
+
+## Compatibility
+
+JavaScript browser-only. All 7 MP markets (MLA/MLB/MLM/MCO/MLC/MPE/MLU).
+
+## Metadata
+
+### Version
+
+1.0.0
 
 # MercadoPago Wallet Brick
 

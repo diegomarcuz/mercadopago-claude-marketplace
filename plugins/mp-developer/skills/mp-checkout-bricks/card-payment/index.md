@@ -1,11 +1,17 @@
----
-name: card-payment
-description: "Card-only payment form with PCI-compliant tokenization, brand detection, and installment selection. Use when: Card Payment Brick, card-only, só cartão, solo tarjeta, credit card form, debit card form, formulário de cartão, tokenizar cartão, tokenizar tarjeta."
-compatibility: "JavaScript browser-only. All 7 MP markets (MLA/MLB/MLM/MCO/MLC/MPE/MLU)."
-metadata:
-  author: "checkout-bricks"
-  version: "1.0.0"
----
+
+## Description
+
+Card-only payment form with PCI-compliant tokenization, brand detection, and installment selection. Use when: Card Payment Brick, card-only, só cartão, solo tarjeta, credit card form, debit card form, formulário de cartão, tokenizar cartão, tokenizar tarjeta.
+
+## Compatibility
+
+JavaScript browser-only. All 7 MP markets (MLA/MLB/MLM/MCO/MLC/MPE/MLU).
+
+## Metadata
+
+### Version
+
+1.0.0
 
 # MercadoPago Card Payment Brick
 

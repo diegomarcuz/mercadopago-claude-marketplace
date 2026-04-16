@@ -1,6 +1,6 @@
 # Checkout Bricks — Shared Setup
 
-This reference contains the shared prerequisites for ALL Checkout Bricks (Payment, Card Payment, Wallet, Status Screen). Every sub-skill must read this file in Step 1 before proceeding with brick-specific logic.
+This reference contains the shared prerequisites for ALL Checkout Bricks (Payment, Card Payment, Wallet, Status Screen). The `mp-checkout-bricks` skill must read this file in Step 1 before proceeding with brick-specific logic.
 
 ---
 

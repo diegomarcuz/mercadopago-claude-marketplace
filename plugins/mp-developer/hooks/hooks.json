@@ -15,7 +15,7 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "Skill(mercadopago:payment|mercadopago:card-payment|mercadopago:wallet|mercadopago:status-screen)",
+        "matcher": "Skill(mercadopago:mp-checkout-bricks)",
         "hooks": [
           {
             "type": "prompt",
