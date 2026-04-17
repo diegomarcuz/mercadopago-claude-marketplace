@@ -110,7 +110,7 @@ After implementation is complete, generate and output a consolidated report:
 **"Would you like to run tests before going live?"**
 
 If yes, execute:
-1. Read: `../../../help/references/rules-testing-cards.md` for test card numbers and status simulation codes
+1. Use `mcp__mercadopago__search_documentation` to fetch the official "Test cards" guide.
 2. Create test users via `mcp__mercadopago__create_test_user`
 3. Test different installment counts (1, 3, 6, 12)
 4. Test both credit and debit cards

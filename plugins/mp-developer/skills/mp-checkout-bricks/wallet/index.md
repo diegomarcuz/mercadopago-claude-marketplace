@@ -100,7 +100,7 @@ After implementation is complete, generate and output a consolidated report:
 **"Would you like to run tests before going live?"**
 
 If yes, execute:
-1. Read: `../../../help/references/rules-testing-cards.md` for test card numbers and payment status simulation codes
+1. Use `mcp__mercadopago__search_documentation` to fetch the official "Test cards" guide.
 2. Create 2 test users via `mcp__mercadopago__create_test_user` (buyer + seller)
 3. Add funds to buyer test account via `mcp__mercadopago__add_money_test_user`
 4. Complete a payment using saved test card or test balance

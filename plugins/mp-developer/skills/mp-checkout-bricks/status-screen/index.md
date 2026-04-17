@@ -100,7 +100,7 @@ After implementation is complete, generate and output a consolidated report:
 **"Would you like to run tests before going live?"**
 
 If yes, execute:
-1. Read: `../../../help/references/rules-testing-cards.md` for test card numbers and payment status simulation codes
+1. Use `mcp__mercadopago__search_documentation` to fetch the official "Test cards" guide.
 2. Use sandbox payment IDs from Card Payment Brick or Payment Brick testing
 3. Test each status scenario (approved, pending, rejected, 3DS challenge)
 4. Click back button — verify it navigates to configured backUrls
