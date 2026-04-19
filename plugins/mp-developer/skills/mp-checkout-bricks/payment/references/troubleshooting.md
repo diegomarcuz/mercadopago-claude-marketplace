@@ -94,7 +94,7 @@ callbacks: { onSubmit: async ({ formData }) => { ... } }  // must be defined
 
 ## API error 400 when creating payment
 
-**Symptom**: Server returns 400 from MP Payments API.
+**Symptom**: Server returns 400 from MP Orders API.
 
 **Common causes:**
 - Missing required fields (token, email, transaction_amount)
@@ -104,9 +104,8 @@ callbacks: { onSubmit: async ({ formData }) => { ... } }  // must be defined
 
 **Fix:**
 ```python
-# Check the full API error response:
-result = sdk.payment().create(payment_data)
-print(result["response"])  # Contains detailed error
+# Check the full Orders API error response body from your backend logs:
+# response.status_code and response.json() should be logged for POST /v1/orders
 ```
 
 ---

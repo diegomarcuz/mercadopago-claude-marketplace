@@ -48,6 +48,15 @@ All Bricks share prerequisites: SDK initialization, container div, credential co
 
 Read: `./references/rules-bricks-setup.md`
 
+## Orders API Policy (MANDATORY)
+
+For `mp-checkout-bricks`, use Orders API in `automatic` mode only.
+
+- Endpoint: `POST /v1/orders`
+- Mode: `processing_mode: "automatic"`
+- Do not use manual flow endpoints (`add-transaction`, `update-transaction`, `delete-transaction`, `process-order`) in this skill.
+- For Status Screen, pass the `payment_id` returned in the order response (first payment transaction id).
+
 ## Country Availability
 
 All 7 markets: Argentina (MLA), Brazil (MLB), Mexico (MLM), Colombia (MCO), Chile (MLC), Peru (MPE), Uruguay (MLU).

@@ -1,31 +1,9 @@
-# Payment — Server-side Reference (create + check status)
+# Orders — Server-side Reference (create + check status)
 
 > **⚠️ IMPORTANT — ACCESS_TOKEN security rule**
 >
-> Creating a payment requires `ACCESS_TOKEN` (secret credential). The AI agent must NEVER execute this code directly — it must NEVER receive, store, or handle the seller's ACCESS_TOKEN. The AI agent should generate this code adapted to the seller's tech stack and guide them to execute it themselves.
 
-## Python
-
-```python
-import mercadopago
-sdk = mercadopago.SDK("YOUR_ACCESS_TOKEN")
-# Use sdk.payment().create(payment_data) — see curl below for full payload structure
-```
-
----
-
-## Node.js
-
-```js
-const { MercadoPagoConfig, Payment } = require("mercadopago");
-const client = new MercadoPagoConfig({ accessToken: "YOUR_ACCESS_TOKEN" });
-const paymentClient = new Payment(client);
-// Use paymentClient.create({ body: paymentData }) — see curl below for full payload structure
-```
-
----
-
-## curl (full payload)
+## Create order (curl)
 
 ```bash
 curl -X POST \
@@ -33,51 +11,75 @@ curl -X POST \
   -H 'content-type: application/json' \
   -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
   -H 'X-Idempotency-Key: SOME_UNIQUE_VALUE' \
-  'https://api.mercadopago.com/v1/payments' \
+  'https://api.mercadopago.com/v1/orders' \
   -d '{
-    "transaction_amount": 100,
-    "token": "ff8080814c11e237014c1ff593b57b4d",
-    "description": "Product description",
-    "installments": 1,
-    "payment_method_id": "visa",
-    "issuer_id": 310,
+    "type": "online",
+    "processing_mode": "automatic",
+    "external_reference": "order_123",
+    "transactions": {
+      "payments": [
+        {
+          "amount": 100,
+          "payment_method": {
+            "id": "visa",
+            "type": "credit_card",
+            "token": "CARD_TOKEN",
+            "installments": 1
+          }
+        }
+      ]
+    },
     "payer": {
-      "email": "PAYER_EMAIL_HERE",
-      "identification": {
-        "number": "19119119100",
-        "type": "CPF"
-      }
+      "email": "buyer@example.com"
     }
   }'
 ```
 
----
+## Extract payment_id for Status Screen
 
-## Check payment status
+After creating the order, read the first payment transaction id from the response:
 
-```python
-import mercadopago
-sdk = mercadopago.SDK("YOUR_ACCESS_TOKEN")
-# Use sdk.payment().get(payment_id)
+```json
+{
+  "id": "01JC1KVZ0WJY8Y4WA7MZAD5S2T",
+  "status": "processed",
+  "transactions": {
+    "payments": [
+      {
+        "id": "pay_01JC1KVZ0WJY8Y4WA7MZG3A8F2",
+        "status": "processed",
+        "status_detail": "accredited"
+      }
+    ]
+  }
+}
 ```
 
-```js
-const { MercadoPagoConfig, Payment } = require("mercadopago");
-const client = new MercadoPagoConfig({ accessToken: "YOUR_ACCESS_TOKEN" });
-const paymentClient = new Payment(client);
-// Use paymentClient.get({ id: paymentId })
+Recommended backend response to frontend:
+
+```json
+{
+  "order_id": "01JC1KVZ0WJY8Y4WA7MZAD5S2T",
+  "payment_id": "pay_01JC1KVZ0WJY8Y4WA7MZG3A8F2",
+  "status": "processed",
+  "status_detail": "accredited"
+}
 ```
+
+## Check order status (curl)
 
 ```bash
 curl -X GET \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
-  'https://api.mercadopago.com/v1/payments/<PAYMENT_ID>'
+  'https://api.mercadopago.com/v1/orders/<ORDER_ID>'
 ```
 
----
+## Status Screen integration note
+
+When using Status Screen Brick, use the `payment_id` from `order.transactions.payments[0].id`.
 
 ## MCP fallback
 
 If this reference did not cover a specific detail, search official documentation:
-`mcp__mercadopago__search_documentation(siteId, term: "create payment API v1 payments")`
+`mcp__mercadopago__search_documentation(siteId, term: "Orders API v1/orders checkout bricks automatic mode")`

@@ -19,7 +19,7 @@
 </html>
 ```
 
-> The `paymentId` must be available before the Brick renders. How it gets to the frontend depends on the seller's tech stack (URL param, template variable, state management, API call, etc.). The agent should detect the current approach or infer from context — if unclear, default to URL params.
+> The `paymentId` must be available before the Brick renders. In Orders automatic flow, it comes from `order.transactions.payments[0].id`. How it gets to frontend depends on the seller's stack (URL param, template variable, state management, API call, etc.). If unclear, default to URL params.
 
 ---
 
@@ -29,6 +29,7 @@
 // payment-result.js
 
 // 1. Get paymentId (adapt to seller's tech stack — URL param, template variable, state, etc.)
+// In Orders automatic flow, backend should return payment_id = order.transactions.payments[0].id
 const paymentId = new URLSearchParams(window.location.search).get("payment_id"); // default: URL param
 
 // 2. Initialize MP SDK
@@ -40,7 +41,7 @@ const renderStatusScreenBrick = async (bricksBuilder) => {
   const settings = {
     // ── initialization
     initialization: {
-      paymentId: parseInt(paymentId), // REQUIRED: integer from payment API response
+      paymentId: paymentId, // REQUIRED: payment transaction id from Orders API execution result
     },
     // ── customization ── see ./customization.md
     // ── customization.backUrls ── see ./rules-backurl.md
@@ -97,7 +98,7 @@ export function PaymentResultPage({ paymentId }) {
 
 ---
 
-### 4. Server-side — create payment / check status
+### 4. Server-side — create order / check status
 
 See `../../references/rules-payment.md` for Python, Node.js, and curl examples (create + check status).
 

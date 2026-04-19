@@ -113,7 +113,7 @@ const bricksBuilder = mp.bricks();
 
 ---
 
-### 5. Server-side — create payment
+### 5. Server-side — create order
 
 See `../../references/rules-payment.md` for Python, Node.js, and curl examples.
 
@@ -133,4 +133,4 @@ window.paymentBrickController = null;
 ## MCP fallback
 
 If this reference did not cover a specific detail, search official documentation:
-`mcp__mercadopago__search_documentation(siteId, term: "Payment Brick render create payment server side")`
+`mcp__mercadopago__search_documentation(siteId, term: "Payment Brick render create order server side")`

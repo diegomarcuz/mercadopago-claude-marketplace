@@ -20,9 +20,9 @@ Called when the user clicks the pay button and the Brick has validated all field
 ### Critical rules
 
 1. **Must return a Promise** — the Brick waits for it to settle. Use `async/await` or return `fetch()` directly. If you don't return a Promise, the Brick won't know when your backend call finishes.
-2. **Send the entire `formData` object** to your backend — do not cherry-pick fields. The shape changes by payment method and country; your backend should forward the complete object to the MP Payments API.
+2. **Send the entire `formData` object** to your backend — do not cherry-pick fields. The shape changes by payment method and country; your backend should forward the complete object to the MP Orders API.
 3. If the Promise **rejects or throws**, the Brick shows a generic error to the user.
-4. If the Promise **resolves**, the Brick considers the payment submitted.
+4. If the Promise **resolves**, the Brick considers the order submitted.
 5. For token-based payments (cards), tokens are **single-use** and expire in **7 days**.
 
 ### Signature
@@ -42,11 +42,13 @@ onSubmit: async ({ selectedPaymentMethod, formData }) => {
   const result = await response.json();
 
   if (!response.ok) {
-    throw new Error(result.message || "Payment failed");
+    throw new Error(result.message || "Order failed");
   }
 
-  // Handle result (redirect, show status, etc.)
-  window.location.href = `/payment/result?payment_id=${result.id}&status=${result.status}`;
+  // Backend contract (recommended):
+  // { order_id, payment_id, status, status_detail }
+  // payment_id must come from order.transactions.payments[0].id
+  window.location.href = `/payment/result?payment_id=${result.payment_id}&status=${result.status}`;
 }
 ```
 
@@ -72,9 +74,9 @@ onSubmit: async ({ formData }) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   });
-  if (!res.ok) throw new Error("Payment failed");
+  if (!res.ok) throw new Error("Order failed");
   const result = await res.json();
-  window.location.href = `/result?id=${result.id}`;
+  window.location.href = `/result?payment_id=${result.payment_id}`;
 }
 ```
 

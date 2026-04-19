@@ -96,7 +96,7 @@ export function CardCheckout({ amount }) {
 
 ---
 
-### 4. Server-side — create payment
+### 4. Server-side — create order
 
 See `../../references/rules-payment.md` for Python, Node.js, and curl examples.
 
@@ -122,4 +122,4 @@ await window.cardPaymentBrickController.unmount();
 ## MCP fallback
 
 If this reference did not cover a specific detail, search official documentation:
-`mcp__mercadopago__search_documentation(siteId, term: "Card Payment Brick render create payment card token server side")`
+`mcp__mercadopago__search_documentation(siteId, term: "Card Payment Brick render create order card token server side")`

@@ -55,11 +55,11 @@ onSubmit: async (cardFormData) => {
 
 **Symptom**: Payment is created but 3DS challenge doesn't appear for cards that should require it.
 
-**Cause:** `three_d_secure_mode` not set in payment creation request.
+**Cause:** `three_d_secure_mode` not set in order creation request.
 
 **Fix:**
 ```python
-# Add to payment creation payload:
+# Add to order creation payload:
 payment_data = {
     "token": token,
     # ...other fields...
@@ -115,7 +115,7 @@ payment_data = {
 
 **Cause:** Debit cards have different flows — they typically don't support installments.
 
-**Fix:** This is correct behavior. Debit cards submit with `installments: 1`. Ensure your backend payment creation accepts `installments: 1`.
+**Fix:** This is correct behavior. Debit cards submit with `installments: 1`. Ensure your backend order creation accepts `installments: 1`.
 
 ---
 

@@ -55,7 +55,7 @@ customization: {
     },
     hideStatusDetails: false,           // Hide payment details section
     hideTransactionDate: false,         // Hide transaction date/time
-    showExternalReference: false,       // Show external_reference from Payments API
+    showExternalReference: false,       // Show external_reference from Orders API
     texts: {
       ctaGeneralErrorLabel: "string",   // Button text for general payment errors
       ctaCardErrorLabel: "string",      // Button text for card data errors
@@ -107,7 +107,7 @@ customization: {
 ```js
 customization: {
   visual: {
-    showExternalReference: true,  // Displays the external_reference from the Payments API
+    showExternalReference: true,  // Displays the external_reference from the Orders API
   }
 }
 ```
@@ -175,7 +175,7 @@ const statusScreenBrickController = await bricksBuilder.create(
   "statusScreenBrick_container",
   {
     initialization: {
-      paymentId: 123456789,             // From your payment API response
+      paymentId: "pay_01JC1KVZ0WJY8Y4WA7MZG3A8F2", // From Orders response: transactions.payments[0].id
     },
     customization: {
       visual: {
@@ -248,7 +248,7 @@ export function PaymentResult({ paymentId }) {
 
 ## Notes
 
-- `showExternalReference` displays the `external_reference` value you set when creating the payment via the Payments API. If no `external_reference` was set on the payment, nothing is shown even when `true`.
+- `showExternalReference` displays the `external_reference` value you set when creating the payment via the Orders API. If no `external_reference` was set on the payment, nothing is shown even when `true`.
 - The 3DS challenge UI is fully controlled by MP -- no customization options for the challenge itself.
 - `hideStatusDetails: true` is useful for compact post-payment confirmations.
 - Button texts (`cta*Label`) override the default localized strings. If omitted, MP provides localized defaults automatically.

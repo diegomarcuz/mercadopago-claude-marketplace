@@ -5,17 +5,17 @@
 **Symptom**: Brick renders with error message instead of payment result.
 
 **Causes:**
-1. `paymentId` is invalid (wrong number, doesn't exist)
+1. `paymentId` is invalid (wrong id, doesn't exist)
 2. `paymentId` is from a different environment (sandbox vs production)
-3. `paymentId` passed as string instead of integer
+3. `paymentId` was not extracted from the order response (`transactions.payments[0].id`)
 
 **Fix:**
 ```js
-// CORRECT — integer
-initialization: { paymentId: 123456789 }
+// CORRECT — use payment id returned by your backend
+initialization: { paymentId: "pay_01JC1KVZ0WJY8Y4WA7MZG3A8F2" }
 
-// WRONG — string
-initialization: { paymentId: "123456789" }
+// WRONG — using order id instead of payment_id
+initialization: { paymentId: "01JC1KVZ0WJY8Y4WA7MZAD5S2T" }
 
 // WRONG — undefined
 initialization: { paymentId: undefined }
@@ -27,9 +27,9 @@ initialization: { paymentId: undefined }
 
 **Symptom**: Payment is `pending_challenge` but the Brick shows a pending message without the challenge UI.
 
-**Cause:** Missing `three_d_secure_mode` in payment creation request.
+**Cause:** Missing `three_d_secure_mode` in order creation request.
 
-**Fix:** Add `three_d_secure_mode: "optional"` to your payment creation request. See `./rules-3ds.md` for details.
+**Fix:** Add `three_d_secure_mode: "optional"` to your order creation request. See `./rules-3ds.md` for details.
 
 ---
 

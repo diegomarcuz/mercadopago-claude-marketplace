@@ -1,6 +1,6 @@
 ## Description
 
-Payment result screen (approved/pending/rejected) with automatic 3DS challenge handling. Requires a payment_id from MercadoPago Payments API. Use when: Status Screen Brick, show payment result, mostrar resultado, resultado del pago, 3DS challenge, tela de status, post-payment screen.
+Payment result screen (approved/pending/rejected) with automatic 3DS challenge handling. Requires a `payment_id` generated from an Orders API `automatic` flow. Use when: Status Screen Brick, show payment result, mostrar resultado, resultado del pago, 3DS challenge, tela de status, post-payment screen.
 
 ## Compatibility
 
@@ -30,7 +30,12 @@ Shared setup: credentials, tech stack detection, SDK initialization, and contain
 
 ### 2. Configure
 
-Configure initialization.paymentId (integer from MP Payments API response) and customization.backUrls (object with return/error).
+Configure initialization.paymentId (payment transaction id obtained from the order execution result) and customization.backUrls (object with return/error).
+
+`payment_id` source (MANDATORY):
+- Use the first payment transaction from the order response:
+- `payment_id = order.transactions.payments[0].id`
+- Pass this value to Status Screen `initialization.paymentId`.
 
 See `./references/rules-backurl.md` for back URL rules. See `./references/rules-3ds.md` for 3DS challenge flow and `./references/rules-status.md` for payment statuses.
 
@@ -113,7 +118,7 @@ After implementation is complete, generate and output a consolidated report:
 
 If yes, execute:
 1. Use `mcp__mercadopago__search_documentation` to fetch the official "Test cards" guide.
-2. Use sandbox payment IDs from Card Payment Brick or Payment Brick testing
+2. Use sandbox payment IDs generated from Card Payment Brick or Payment Brick Orders API testing
 3. Test each status scenario (approved, pending, rejected, 3DS challenge)
 4. Click back button — verify it navigates to configured backUrls
 

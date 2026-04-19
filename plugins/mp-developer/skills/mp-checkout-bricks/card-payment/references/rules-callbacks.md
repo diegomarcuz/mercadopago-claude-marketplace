@@ -20,9 +20,9 @@ Called when the user submits the card form and MP has successfully tokenized the
 ### Critical rules
 
 1. **Must return a Promise** — the Brick waits for it to settle. Use `async/await` or return `fetch()` directly. If you don't return a Promise, the Brick won't know when your backend call finishes.
-2. **Send the entire `cardFormData` object** to your backend — do not cherry-pick fields. Your backend should forward the complete object to the MP Payments API.
+2. **Send the entire `cardFormData` object** to your backend — do not cherry-pick fields. Your backend should forward the complete object to the MP Orders API.
 3. If the Promise **rejects or throws**, the Brick shows an error state to the user.
-4. If the Promise **resolves**, the Brick considers the payment submitted.
+4. If the Promise **resolves**, the Brick considers the order submitted.
 5. **Use the `token` immediately** — tokens are **single-use** and expire in **7 days**.
 
 ### Signature
@@ -41,17 +41,20 @@ onSubmit: async (cardFormData) => {
   const result = await response.json();
 
   if (!response.ok) {
-    throw new Error(result.message || "Payment failed");
+    throw new Error(result.message || "Order failed");
   }
 
+  // Backend contract (recommended):
+  // { order_id, payment_id, status, status_detail }
+  // payment_id must come from order.transactions.payments[0].id
   // Handle 3DS if required
   if (result.status === "pending" && result.status_detail === "pending_challenge") {
-    window.location.href = `/payment/3ds?payment_id=${result.id}`;
+    window.location.href = `/payment/3ds?payment_id=${result.payment_id}`;
     return;
   }
 
   // Redirect to result page
-  window.location.href = `/payment/result?payment_id=${result.id}&status=${result.status}`;
+  window.location.href = `/payment/result?payment_id=${result.payment_id}&status=${result.status}`;
 }
 ```
 
@@ -77,9 +80,9 @@ onSubmit: async (cardFormData) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(cardFormData),
   });
-  if (!res.ok) throw new Error("Payment failed");
+  if (!res.ok) throw new Error("Order failed");
   const result = await res.json();
-  window.location.href = `/result?id=${result.id}`;
+  window.location.href = `/result?payment_id=${result.payment_id}`;
 }
 ```
 

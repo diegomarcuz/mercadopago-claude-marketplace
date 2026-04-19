@@ -51,11 +51,14 @@ onSubmit (required, Promise, sends cardFormData), onReady (required), onError (r
 
 ---
 
-### 5. Create payment on the server side
+### 5. Create order on the server side
 
-Read: `./references/snippets.md` — "Server-side payment creation" section.
+Read: `./references/snippets.md` — "Server-side order creation" section.
 
-Backend uses token + formData to call MP Payments API. Handles 3DS if needed.
+Backend uses token + formData to call MP Orders API (`POST /v1/orders`) using `processing_mode: "automatic"` only. Handles 3DS if needed.
+
+From the order response, extract `payment_id` from the first payment transaction and return it to frontend:
+- `payment_id = order.transactions.payments[0].id`
 
 ---
 
@@ -92,7 +95,7 @@ After implementation is complete, generate and output a consolidated report:
 - [x] Step 2: Card types and installments configured
 - [x] Step 3: Brick rendered
 - [x] Step 4: Callbacks implemented
-- [x] Step 5: Server-side payment created
+- [x] Step 5: Server-side order created
 - [x] Quality gates completed (`mcp__mercadopago__quality_checklist` + `mcp__mercadopago__quality_evaluation`)
 - [x] Implementation Report generated
 
