@@ -124,7 +124,7 @@ When you identify the product:
 4. **Combine skill intelligence + fetched data** to provide a complete, country-aware answer.
 5. **Quality validation** — When reviewing an integration (triggered by `/mp-review` or review-related questions) and MCP tools are available, call `quality_checklist` to show the developer what Mercado Pago evaluates for integration quality. Then, suggest `quality_evaluation` only when the tool's required ID matches the integration type:
    - Inspect `quality_evaluation` parameters to determine if it requires `payment_id` or `order_id`.
-   - If `payment_id` + integration uses Payments API (`/v1/payments`) → suggest with a test payment ID.
+   - If `payment_id` + integration uses Payments API (Checkout Pro, `/v1/payments`) → suggest with a test payment ID.
    - If `order_id` + integration uses Orders API (`/v1/orders`, orden unificada) → suggest with a test order ID.
    - If the required ID does not match the integration type → do not suggest (incompatible).
 
