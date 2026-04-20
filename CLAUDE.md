@@ -66,7 +66,7 @@ allowed-tools: [Read, Write, Edit, Bash]     # allowed-tools, NOT tools
 | Country detection, product routing, security checklist | `agents/mp-integration-expert.md` | Signal-to-skill routing table |
 | User-facing commands (/mp-setup, /mp-review) | `commands/*.md` | Scaffolding instructions |
 
-**NEVER hardcode code snippets or API payloads in skills.** They go stale. The MCP server provides current data.
+**Code snippets or API payloads in skills** can be used to express determinism, but be aware that could become stale rather than MCP tools output. Code snippets can be used, but with caution, user must approve the use.
 
 ## Skill Lifecycle
 
